@@ -57,7 +57,6 @@ export function horizontal(row, word, index) {
             count++
         }
     }
-    console.log(count,match);
     if (match === word) return false
     return count === word.length
 }
@@ -75,7 +74,7 @@ export function vertical(grid, word, index, row) {
             count++
         }
     }
-    console.log(count,match);
+    // console.log(count,match);
     if (match === word) return false
     return count === word.length
 }
