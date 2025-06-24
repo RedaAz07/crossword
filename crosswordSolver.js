@@ -4,50 +4,41 @@ import { solver } from './modules/solver.js';
 
 function crosswordSolver(puzzle, words) {
     if (!valid.checker(puzzle, words)) {
-        console.log("Error");
+        console.log("Error check");
         return;
     }
 
     const grid = mod.parser(puzzle);
     const solved = grid.map(row => [...row]);
+    const revers = grid.map(row => [...row]);
 
     const success = solver(grid, solved, words, 0);
+    solver(grid, revers, words.reverse(), 0);
+
+    if (solved.includes('0')) {
+        console.log("Error 0");
+        return
+    }
 
     if (!success) {
-        console.log("Error");
+        console.log("Error no solution");
         return;
     }
 
     const output = solved.map(row => row.join('')).join('\n');
+    const reverse = revers.map(row => row.join('')).join('\n');
+
+    if (output !== reverse) {
+        console.log("Error dupp");
+        return;
+    }
     console.log(output);
 }
-const puzzle = `...1...........
-..1000001000...
-...0....0......
-.1......0...1..
-.0....100000000
-100000..0...0..
-.0.....1001000.
-.0.1....0.0....
-.10000000.0....
-.0.0......0....
-.0.0.....100...
-...0......0....
-..........0....`
 
-const words = [
-  'sun',
-  'sunglasses',
-  'suncream',
-  'swimming',
-  'bikini',
-  'beach',
-  'icecream',
-  'tan',
-  'deckchair',
-  'sand',
-  'seaside',
-  'sandals',
-].reverse();
+
+const puzzle = '2001\n0..0\n1000\n0..0'
+const words = ['casa', 'alan', 'ciao', 'anta']
 
 crosswordSolver(puzzle, words);
+
+

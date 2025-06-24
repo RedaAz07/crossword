@@ -11,13 +11,18 @@ export function checker(grid, words) {
 
     if (setOfWords.size !== words.length) return false
 
-
+    let count = 0
     for (let i = 0; i < numbers.length; i++) {
-        if (numbers[i] !== '.' && numbers[i] !== '\n' && isNaN(numbers[i])) return false
+        if (numbers[i] !== '.' && numbers[i] !== '\n' && (numbers[i].charCodeAt(0) < 48 || numbers[i].charCodeAt(0) > 57 )) return false
 
         if (numbers[i] > 2) return false
-
+        if (!isNaN(numbers[i])) {
+            count += Number(numbers[i])
+        }
     }
+
+    if (count !== words.length) return false
+
     let rows = grid.split('\n')
 
     for (let i = 0; i < rows.length - 1; i++) {
@@ -52,7 +57,7 @@ export function horizontal(row, word, index) {
         if (!isNaN(row[i])){
             count++
         }else{
-            if (row[i] !== word[count]) break
+            if (row[i] !== word[count] && word[count]  !== undefined) break
             match += row[i]
             count++
         }
@@ -69,7 +74,7 @@ export function vertical(grid, word, index, row) {
         if (!isNaN(grid[i][index])){
             count++
         }else{
-            if (grid[i][index] !== word[count]) break
+            if (grid[i][index] !== word[count] && word[count] !== undefined) break
             match += grid[i][index]
             count++
         }

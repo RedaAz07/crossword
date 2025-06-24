@@ -7,7 +7,7 @@ export function solver(grid, solved, words, index) {
 
     for (let row = 0; row < grid.length; row++) {
         for (let col = 0; col < grid[0].length; col++) {
-            if (!isNaN(grid[row][col])) {
+            if ((grid[row][col] === '1'  || grid[row][col] === '2'  )  ) {
                
                 if (horizontal(solved[row], word, col)) {
                     const backup = [...solved[row]];
