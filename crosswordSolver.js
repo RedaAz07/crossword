@@ -4,10 +4,11 @@ import { solver } from './modules/solver.js';
 
 function crosswordSolver(puzzle, words) {
     if (!valid.checker(puzzle, words)) {
-        console.log("Error check");
+        console.log("Error");
         return;
     }
 
+   
     const grid = mod.parser(puzzle);
     const solved = grid.map(row => [...row]);
     const revers = grid.map(row => [...row]);
@@ -16,12 +17,12 @@ function crosswordSolver(puzzle, words) {
     solver(grid, revers, words.reverse(), 0);
 
     if (solved.includes('0')) {
-        console.log("Error 0");
+        console.log("Error");
         return
     }
 
     if (!success) {
-        console.log("Error no solution");
+        console.log("Error");
         return;
     }
 
@@ -29,15 +30,13 @@ function crosswordSolver(puzzle, words) {
     const reverse = revers.map(row => row.join('')).join('\n');
 
     if (output !== reverse) {
-        console.log("Error dupp");
+        console.log("Error");
         return;
     }
     console.log(output);
 }
 
 
-const puzzle = '2001\n0..0\n1000\n0..0'
-const words = ['casa', 'alan', 'ciao', 'anta']
 
 crosswordSolver(puzzle, words);
 

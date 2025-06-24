@@ -13,7 +13,7 @@ export function checker(grid, words) {
 
     let count = 0
     for (let i = 0; i < numbers.length; i++) {
-        if (numbers[i] !== '.' && numbers[i] !== '\n' && (numbers[i].charCodeAt(0) < 48 || numbers[i].charCodeAt(0) > 57 )) return false
+        if (numbers[i] !== '.' && numbers[i] !== '\n' && (numbers[i].charCodeAt(0) < 48 || numbers[i].charCodeAt(0) > 57)) return false
 
         if (numbers[i] > 2) return false
         if (!isNaN(numbers[i])) {
@@ -40,7 +40,7 @@ export function checker(grid, words) {
 
     let longWord = words[0].length
     for (let i = 1; i < words.length; i++) {
-
+        if (!isNaN(words[i])) return false
         if (words[i].length > longWord) longWord = words[i].length
     }
 
@@ -54,10 +54,10 @@ export function horizontal(row, word, index) {
     let match = ''
     for (let i = index; i < row.length; i++) {
         if (row[i] === '.') break
-        if (!isNaN(row[i])){
+        if (!isNaN(row[i])) {
             count++
-        }else{
-            if (row[i] !== word[count] && word[count]  !== undefined) break
+        } else {
+            if (row[i] !== word[count] && word[count] !== undefined) break
             match += row[i]
             count++
         }
@@ -71,9 +71,9 @@ export function vertical(grid, word, index, row) {
     let match = ''
     for (let i = row; i < grid.length; i++) {
         if (grid[i][index] === '.') break
-        if (!isNaN(grid[i][index])){
+        if (!isNaN(grid[i][index])) {
             count++
-        }else{
+        } else {
             if (grid[i][index] !== word[count] && word[count] !== undefined) break
             match += grid[i][index]
             count++
