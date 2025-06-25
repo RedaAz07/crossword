@@ -49,16 +49,17 @@ export function checker(grid, words) {
     return true
 }
 
-export function horizontal(row, word, index) {
+export function horizontal(solved, word, col, row, grid) {
     let count = 0
     let match = ''
-    for (let i = index; i < row.length; i++) {
-        if (row[i] === '.') break
-        if (!isNaN(row[i])) {
+
+    for (let i = col; i < solved[row].length; i++) {
+        if (solved[row][i] === '.') break
+        if (!isNaN(solved[row][i])) {
             count++
         } else {
-            if (row[i] !== word[count] && word[count] !== undefined) break
-            match += row[i]
+            if (solved[row][i] !== word[count] && word[count] !== undefined) break
+            match += solved[row][i]
             count++
         }
     }
@@ -66,16 +67,17 @@ export function horizontal(row, word, index) {
     return count === word.length
 }
 
-export function vertical(grid, word, index, row) {
+export function vertical(solved, word, col, row, grid) {
     let count = 0
     let match = ''
-    for (let i = row; i < grid.length; i++) {
-        if (grid[i][index] === '.') break
-        if (!isNaN(grid[i][index])) {
+ 
+    for (let i = row; i < solved.length; i++) {
+        if (solved[i][col] === '.') break
+        if (!isNaN(solved[i][col])) {
             count++
         } else {
-            if (grid[i][index] !== word[count] && word[count] !== undefined) break
-            match += grid[i][index]
+            if (solved[i][col] !== word[count] && word[count] !== undefined) break
+            match += solved[i][col]
             count++
         }
     }
