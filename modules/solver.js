@@ -14,18 +14,24 @@ export function solver(grid, solved, words, index) {
                     for (let i = 0; i < word.length; i++) {
                         solved[row][col + i] = word[i];
                     }
+                    if (grid[row][col] === '1') grid[row][col] = '0';
                     if (solver(grid, solved, words, index + 1)) return true;
+                    if (grid[row][col] === '0') grid[row][col] = '1';
+
                     solved[row] = backup;
                 }
-
+            }
+            if ((grid[row][col] === '1' || grid[row][col] === '2')) {
                 if (vertical(solved, word, col, row, grid)) {
                     const backup = [];
                     for (let i = 0; i < word.length; i++) {
                         backup.push(solved[row + i][col]);
                         solved[row + i][col] = word[i];
                     }
-                    
+
+                    if (grid[row][col] === '1') grid[row][col] = '0';
                     if (solver(grid, solved, words, index + 1)) return true;
+                    if (grid[row][col] === '0') grid[row][col] = '1';
                     for (let i = 0; i < word.length; i++) {
                         solved[row + i][col] = backup[i];
                     }

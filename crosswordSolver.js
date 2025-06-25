@@ -10,11 +10,13 @@ function crosswordSolver(puzzle, words) {
 
    
     const grid = mod.parser(puzzle);
+    const revereGrid = mod.parser(puzzle);
+
     const solved = grid.map(row => [...row]);
     const revers = grid.map(row => [...row]);
 
     const success = solver(grid, solved, words, 0);
-    solver(grid, revers, words.reverse(), 0);
+    solver(revereGrid , revers, words.reverse(), 0);
 
     if (solved.includes('0')) {
         console.log("Error");
@@ -36,7 +38,7 @@ function crosswordSolver(puzzle, words) {
     console.log(output);
     
 }
-const puzzle = '2001\n0..0\n1000\n0..0'
+const puzzle = '1001\n0..0\n2000\n0..0'
 const words = ['casa', 'alan', 'ciao', 'anta']
 
 
